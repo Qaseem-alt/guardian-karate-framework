@@ -9,7 +9,6 @@ public class GenerateData {
 		String email = prefix + random + provider;
 		return email;
 		
-		
 	}
 	
 	public static String getPhoneNumber() {

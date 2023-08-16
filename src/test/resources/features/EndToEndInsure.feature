@@ -3,8 +3,8 @@ Feature:
   Background: 
     Given url "https://tek-insurance-api.azurewebsites.net"
     * def createdAccount = callonce read('CreateAccount.feature')
-    * def validToken = createdAccount.token
-    * def primaryAccountId = createdAccount.Id
+    * def primaryAccountId = createdAccount.response.id
+    * def validToken = createdAccount.result.response.token
 
   Scenario: End To End Test for account creation
     Given url "https://tek-insurance-api.azurewebsites.net"
@@ -42,3 +42,25 @@ Feature:
       """
     And method post
     Then status 201
+    Given url "https://tek-insurance-api.azurewebsites.net"
+    When path "/api/accounts/add-account-car"
+    And header Authorization = "Bearer " + validToken
+    And param primaryPersonId = primaryAccountId
+    And request
+      """
+      {
+      "make": "Mazda",
+      "model": "v6",
+      "year": "2023",
+      "licensePlate": "cet123te"
+      }
+      """
+    And method post
+    Then status 201
+    Given url "https://tek-insurance-api.azurewebsites.net"
+    When path "/api/accounts/delete-account"
+    And header Authorization = "Bearer " + validToken
+    And param primaryPersonId = primaryAccountId
+    And method delete
+    Then status 200
+    Given assert response == "Account Successfully deleted"
