@@ -1,3 +1,4 @@
+@Smoke
 Feature: Register new user
 
 Background: setup tests and creat new account
