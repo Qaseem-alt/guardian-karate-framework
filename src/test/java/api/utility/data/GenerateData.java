@@ -19,11 +19,22 @@ public class GenerateData {
 		return phoneNumber;
 	}
 	
+	public static String getUserName() {
+		String prefix = "Auto_UserN";
+		int random = (int)(Math.random() * 1000);
+		String Username = prefix.concat(random+"");
+		return Username;
+	}
+	
 	public static void main(String[] args) {
 		GenerateData data = new GenerateData();
 		System.out.println(data.getEmail());
 		System.out.println(data.getPhoneNumber());
+		System.out.println(data.getUserName());
+		
 		
 	}
+  
 
+	
 }
