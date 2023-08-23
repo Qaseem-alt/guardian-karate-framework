@@ -1,3 +1,4 @@
+@Smoke
 Feature: Register new user
 
 Background: setup tests and creat new account
@@ -25,3 +26,5 @@ And request
 When method post 
 And print response
 Then status 201
+
+
